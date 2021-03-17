@@ -29,7 +29,7 @@ public class Main {
         ImageMatrix imageMatrix = new ImageMatrix(newImage);
 
         List<List<Cell>> cells = imageMatrix.splitIntoCells();
-        BufferedImage processedTest = ImageMatrix.fromCells(cells).toBufferedImage();
+        BufferedImage processedTest = imageMatrix.toBufferedImage();
         File outputfileTest = new File("processedImageTest.jpg");
         ImageIO.write(processedTest, "jpg", outputfileTest);
 
