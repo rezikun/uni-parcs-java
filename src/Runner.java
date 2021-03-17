@@ -12,7 +12,11 @@ public class Runner implements AM {
         System.out.println(String.format("Got row of size %d", row.size()));
         List<Cell> newRow = new ArrayList<>();
         for (Cell cell : row) {
-            newRow.add(Cell.decode(cell.encode()));
+            List<Float> rvector = new ArrayList<>();
+            List<Float> gvector = new ArrayList<>();
+            List<Float> bvector = new ArrayList<>();
+            cell.encode(rvector, gvector, bvector);
+            newRow.add(Cell.decode(rvector, gvector, bvector));
         }
         info.parent.write((Serializable) newRow);
     }
