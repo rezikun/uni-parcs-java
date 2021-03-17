@@ -24,9 +24,6 @@ public class Main {
         List<List<Cell>> cells = imageMatrix.splitIntoCells();
 
         List<channel> channels = new ArrayList<>();
-
-        System.out.println("Waiting for result...");
-
         for (List<Cell> cellRow: cells) {
             point p = info.createPoint();
             channel c = p.createChannel();
@@ -34,14 +31,19 @@ public class Main {
             c.write(newImage.getWidth() / 8);
             c.write((Serializable) cellRow);
             channels.add(c);
+            System.out.println("Sent row.");
         }
+
+        System.out.println("Waiting for result...");
 
         List<List<Cell>> processedCells = new ArrayList<>();
         for (parcs.channel channel : channels) {
             List<Cell> cellRow = (List<Cell>) channel.readObject();
             processedCells.add(cellRow);
+            System.out.println("Got processed row.");
         }
 
+        System.out.println("Decoding image.");
         BufferedImage processed = ImageMatrix.fromCells(processedCells).toBufferedImage();
         File outputfile = new File("processedImage.jpg");
         ImageIO.write(processed, "jpg", outputfile);
