@@ -15,7 +15,7 @@ public class Main {
         AMInfo info = new AMInfo(curtask, null);
 
         System.out.println("Loading image...");
-        File img = new File(curtask.findFile("small.jpg"));
+        File img = new File(curtask.findFile("image.jpg"));
         BufferedImage newImage = ImageIO.read(img);
         System.out.println("OLD");
         for (int i = 0; i < 16; ++i) {
