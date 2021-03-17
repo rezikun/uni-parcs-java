@@ -18,7 +18,7 @@ public class Cell implements Serializable {
             {99, 99, 99, 99, 99, 99, 99, 99},
             {99, 99, 99, 99, 99, 99, 99, 99}};
 
-    private static final float THRESHOLD = 0.0005f;
+    private static final float THRESHOLD = 0.0000005f;
     public Cell(Color[][] cell) {
         matrix = cell;
     }
