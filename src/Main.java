@@ -15,7 +15,7 @@ public class Main {
         AMInfo info = new AMInfo(curtask, null);
 
         System.out.println("Loading image...");
-        File img = new File(curtask.findFile("image.jpg"));
+        File img = new File(curtask.findFile("big.jpeg"));
         BufferedImage newImage = ImageIO.read(img);
         ImageMatrix imageMatrix = new ImageMatrix(newImage);
 
