@@ -1,6 +1,7 @@
 import parcs.*;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.Serializable;
@@ -19,7 +20,9 @@ public class Main {
         System.out.println("OLD");
         for (int i = 0; i < 16; ++i) {
             for (int j = 0; j < 16; ++j){
-                System.out.println(newImage.getRGB(i, j));
+                Color color = new Color(newImage.getRGB(i, j));
+                System.out.println(String.format("A: %d, R: %d G: %d B: %d",
+                        color.getAlpha(), color.getRed(), color.getGreen(), color.getBlue()));
             }
         }
         System.out.println("\n");
@@ -49,7 +52,9 @@ public class Main {
         System.out.println("NEW");
         for (int i = 0; i < 16; ++i) {
             for (int j = 0; j < 16; ++j){
-                System.out.println(processed.getRGB(i, j));
+                Color color = new Color(processed.getRGB(i, j));
+                System.out.println(String.format("A: %d, R: %d G: %d B: %d",
+                        color.getAlpha(), color.getRed(), color.getGreen(), color.getBlue()));
             }
         }
         System.out.println("\n");
