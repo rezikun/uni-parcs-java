@@ -31,7 +31,6 @@ public class Main {
             c.write(newImage.getWidth() / 8);
             c.write((Serializable) cellRow);
             channels.add(c);
-            System.out.println("Sent row.");
         }
 
         System.out.println("Waiting for result...");
