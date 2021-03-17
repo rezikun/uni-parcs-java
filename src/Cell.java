@@ -71,6 +71,7 @@ public class Cell implements Serializable {
         for (int i = 0; i< 8; ++i) {
             for (int j = 0; j < 8; ++j) {
                 rMatrix[i][j] = invertQuatization(rMatrix[i][j], i, j);
+                System.out.println(rMatrix[i][j]);
                 gMatrix[i][j] = invertQuatization(gMatrix[i][j], i, j);
                 bMatrix[i][j] = invertQuatization(bMatrix[i][j], i, j);
             }
