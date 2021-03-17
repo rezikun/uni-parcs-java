@@ -16,4 +16,4 @@ out/DCT.jar: out/JTransforms-3.1-with-dependencies.jar out/parcs.jar src/DCT.jav
 build: out/Main.jar out/DCT.jar
 
 run: out/Main.jar out/DCT.jar
-	@cd out && java -cp 'JTransforms-3.1-with-dependencies.jar:parcs.jar:Main.jar' Main
+	@cd out && java -cp Main.jar Main
