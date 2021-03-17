@@ -38,8 +38,6 @@ public class Main {
         for (parcs.channel channel : channels) {
             List<Cell> cellRow = (List<Cell>) channel.readObject();
             processedCells.add(cellRow);
-            System.out.println("Got processed row.");
-            System.out.println(cellRow.size());
         }
 
         System.out.println("Decoding image.");
