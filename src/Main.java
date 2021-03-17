@@ -16,8 +16,8 @@ public class Main {
         System.out.println("Loading image...");
         File img = new File(curtask.findFile("image.jpg"));
         BufferedImage newImage = ImageIO.read(img);
-        File outputfile = new File("processedImageTest.jpg");
-        ImageIO.write(newImage, "jpg", outputfile);
+        File outputfileTest = new File("processedImageTest.jpg");
+        ImageIO.write(newImage, "jpg", outputfileTest);
         ImageMatrix imageMatrix = new ImageMatrix(newImage);
 
         List<List<Cell>> cells = imageMatrix.splitIntoCells();
