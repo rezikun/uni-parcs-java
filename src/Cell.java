@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.io.Serializable;
 
@@ -22,12 +23,12 @@ public class Cell implements Serializable {
         matrix = cell;
     }
 
-    private float useQuatization(float val, int i, int j) {
+    private static float useQuatization(float val, int i, int j) {
         float res = val / quantizationTable[i][j];
         return Math.abs(res) > THRESHOLD ? res : 0.0f;
     }
 
-    private float invertQuatization(float val, int i, int j) {
+    private static float invertQuatization(float val, int i, int j) {
         return val * quantizationTable[i][j];
     }
     public static float[] mode(float[][] arr) {
@@ -49,10 +50,8 @@ public class Cell implements Serializable {
         }
         return vector;
     }
-    private Cell transform() {
-        float[][] rMatrix = new float[8][8];
-        float[][] gMatrix = new float[8][8];
-        float[][] bMatrix = new float[8][8];
+    private void transform(float[][] rMatrix, float[][] gMatrix, float[][] bMatrix) {
+
         for (int i = 0; i< 8; ++i) {
             for (int j = 0; j < 8; ++j) {
                 rMatrix[i][j] = matrix[i][j].getRed() - 128;
@@ -63,25 +62,21 @@ public class Cell implements Serializable {
         Dct.forwardDCT8x8(mode(rMatrix));
         Dct.forwardDCT8x8(mode(gMatrix));
         Dct.forwardDCT8x8(mode(bMatrix));
-        Color[][] newMatrix = new Color[8][8];
         for (int i = 0; i< 8; ++i) {
             for (int j = 0; j < 8; ++j) {
-                newMatrix[i][j] = new Color(useQuatization(rMatrix[i][j], i, j), useQuatization(gMatrix[i][j], i, j),
-                        useQuatization(bMatrix[i][j], i, j));
+                rMatrix[i][j] = useQuatization(rMatrix[i][j], i, j);
+                gMatrix[i][j] = useQuatization(gMatrix[i][j], i, j);
+                bMatrix[i][j] = useQuatization(bMatrix[i][j], i, j);
             }
         }
-        return new Cell(newMatrix);
     }
 
-    private Cell detransform() {
-        float[][] rMatrix = new float[8][8];
-        float[][] gMatrix = new float[8][8];
-        float[][] bMatrix = new float[8][8];
+    private static Cell detransform(float[][] rMatrix, float[][] gMatrix, float[][] bMatrix) {
         for (int i = 0; i< 8; ++i) {
             for (int j = 0; j < 8; ++j) {
-                rMatrix[i][j] = invertQuatization(matrix[i][j].getRed(), i, j);
-                gMatrix[i][j] = invertQuatization(matrix[i][j].getGreen(), i, j);
-                bMatrix[i][j] = invertQuatization(matrix[i][j].getBlue(), i, j);
+                rMatrix[i][j] = invertQuatization(rMatrix[i][j], i, j);
+                gMatrix[i][j] = invertQuatization(gMatrix[i][j], i, j);
+                bMatrix[i][j] = invertQuatization(bMatrix[i][j], i, j);
             }
         }
         Dct.inverseDCT8x8(mode(rMatrix));
@@ -90,26 +85,38 @@ public class Cell implements Serializable {
         Color[][] newMatrix = new Color[8][8];
         for (int i = 0; i< 8; ++i) {
             for (int j = 0; j < 8; ++j) {
-                newMatrix[i][j] = new Color(rMatrix[i][j] + 128, gMatrix[i][j] + 128, bMatrix[i][j] + 128);
+                newMatrix[i][j] =
+                        new Color((int)rMatrix[i][j] + 128, (int)gMatrix[i][j] + 128, (int)bMatrix[i][j] + 128);
             }
         }
         return new Cell(newMatrix);
     }
 
-    public List<Color> encode() {
-        Cell transformedCell = this.transform();
-        List<Color> vector = new ArrayList<>();
+    public void encode(List<Float> rvector, List<Float> gvector, List<Float> bvector) {
+        float[][] rMatrix = new float[8][8];
+        float[][] gMatrix = new float[8][8];
+        float[][] bMatrix = new float[8][8];
+        transform(rMatrix, gMatrix, bMatrix);
         for (int i = 0; i < 8; ++i) {
-            vector.addAll(Arrays.asList(transformedCell.matrix[i]).subList(0, 8));
+            for (int j = 0; j < 8; ++j) {
+                rvector.add(rMatrix[i][j]);
+                gvector.add(gMatrix[i][j]);
+                bvector.add(bMatrix[i][j]);
+            }
         }
-        return vector;
     }
 
-    public static Cell decode(List<Color> vector) {
-        Color[][] mat = new Color[8][8];
-        for (int i = 0; i < vector.size(); ++i) {
-            mat[i / 8][i % 8] = vector.get(i);
+    public static Cell decode(List<Float> rvector, List<Float> gvector, List<Float> bvector) {
+        float[][] rMatrix = new float[8][8];
+        float[][] gMatrix = new float[8][8];
+        float[][] bMatrix = new float[8][8];
+
+        for (int i = 0; i < rvector.size(); ++i) {
+            rMatrix[i / 8][i % 8] = rvector.get(i);
+            gMatrix[i / 8][i % 8] = gvector.get(i);
+            bMatrix[i / 8][i % 8] = bvector.get(i);
         }
-        return new Cell(mat);
+
+        return detransform(rMatrix, gMatrix, bMatrix);
     }
 }
