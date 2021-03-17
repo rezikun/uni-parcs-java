@@ -8,7 +8,6 @@ import java.util.List;
 public class DCT implements AM {
     @Override
     public void run(AMInfo info) {
-        int width = info.parent.readInt();
         List<Cell> row = (List<Cell>) info.parent.readObject();
         System.out.println(String.format("Got row of size %d", row.size()));
         List<Cell> newRow = new ArrayList<>();

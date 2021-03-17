@@ -28,7 +28,6 @@ public class Main {
             point p = info.createPoint();
             channel c = p.createChannel();
             p.execute("DCT");
-            c.write(newImage.getWidth() / 8);
             c.write((Serializable) cellRow);
             channels.add(c);
         }
