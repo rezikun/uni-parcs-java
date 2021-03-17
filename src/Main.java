@@ -14,8 +14,7 @@ public class Main {
         AMInfo info = new AMInfo(curtask, null);
 
         System.out.println("Loading image...");
-        File img = new File(curtask.findFile("image.jpg"));
-        BufferedImage in = ImageIO.read(Main.class.getResource("/out/image.jpg"));
+        BufferedImage in = ImageIO.read(Main.class.getResource("/image.jpg"));
         if (in.getWidth() == 0) {
             throw new RuntimeException("Empty image");
         }
