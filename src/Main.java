@@ -14,12 +14,10 @@ public class Main {
         AMInfo info = new AMInfo(curtask, null);
 
         System.out.println("Loading image...");
-        BufferedImage in = ImageIO.read(Main.class.getResource("/image.jpg"));
-        if (in.getWidth() == 0) {
-            throw new RuntimeException("Empty image");
-        }
+        File img = new File(curtask.findFile("image.jpg"));
+        BufferedImage in = ImageIO.read(img);
         BufferedImage newImage = new BufferedImage(
-                in.getWidth(), in.getHeight(), BufferedImage.TYPE_INT_ARGB);
+                in.getWidth(), in.getHeight(), BufferedImage.TYPE_INT_RGB);
         ImageMatrix imageMatrix = new ImageMatrix(newImage);
 
         List<List<Cell>> cells = imageMatrix.splitIntoCells();
