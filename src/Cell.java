@@ -110,7 +110,7 @@ public class Cell implements Serializable {
         float[][] rMatrix = new float[8][8];
         float[][] gMatrix = new float[8][8];
         float[][] bMatrix = new float[8][8];
-
+        System.out.println(rvector.size());
         for (int i = 0; i < rvector.size(); ++i) {
             rMatrix[i / 8][i % 8] = rvector.get(i);
             gMatrix[i / 8][i % 8] = gvector.get(i);
