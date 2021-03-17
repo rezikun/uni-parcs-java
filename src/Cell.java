@@ -21,7 +21,6 @@ public class Cell implements Serializable {
     private static final float THRESHOLD = 0.0005f;
     public Cell(Color[][] cell) {
         matrix = cell;
-        System.out.println(cell[0][0].getBlue());
     }
 
     private static float useQuatization(float val, int i, int j) {
