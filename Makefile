@@ -9,7 +9,7 @@ out/Main.jar: out/JTransforms-3.1-with-dependencies.jar out/parcs.jar src/*.java
 	@rm -f src/*.class
 
 out/DCT.jar: out/JTransforms-3.1-with-dependencies.jar out/parcs.jar src/DCT.java src/Cell.java src/ImageMatrix.java
-	@javac -cp 'out/parcs.jar:out/JTransforms-3.1-with-dependencies.jar' src/DCT.java src/Cell.java src/ImageMatrix.java
+	@javac -cp 'out/JTransforms-3.1-with-dependencies.jar:out/parcs.jar' src/DCT.java src/Cell.java src/ImageMatrix.java
 	@jar cf out/DCT.jar -C src .
 	@rm -f src/DCT.class src/Cell.class src/ImageMatrix.class
 
