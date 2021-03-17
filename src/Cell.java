@@ -34,16 +34,10 @@ public class Cell implements Serializable {
     public static float[] mode(float[][] arr) {
         List<Float> list = new ArrayList<Float>();
         for (float[] ints : arr) {
-            // tiny change 1: proper dimensions
             for (float anInt : ints) {
-                // tiny change 2: actually store the values
                 list.add(anInt);
             }
         }
-
-        // now you need to find a mode in the list.
-
-        // tiny change 3, if you definitely need an array
         float[] vector = new float[list.size()];
         for (int i = 0; i < vector.length; i++) {
             vector[i] = list.get(i);
@@ -53,6 +47,7 @@ public class Cell implements Serializable {
     private void transform(float[][] rMatrix, float[][] gMatrix, float[][] bMatrix) {
         for (int i = 0; i< 8; ++i) {
             for (int j = 0; j < 8; ++j) {
+                System.out.println(matrix[i][j].getRed());
                 rMatrix[i][j] = matrix[i][j].getRed() - 128;
                 gMatrix[i][j] = matrix[i][j].getGreen() - 128;
                 bMatrix[i][j] = matrix[i][j].getBlue() - 128;
