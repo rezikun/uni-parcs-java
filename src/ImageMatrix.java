@@ -34,7 +34,7 @@ public class ImageMatrix {
                 Color[][] cellMatrix = new Color[8][8];
                 for (int cellRow = 0; cellRow < 8; ++cellRow) {
                     for (int cellColumn = 0; cellColumn < 8; ++cellColumn) {
-                        cellMatrix[cellRow][cellColumn] = matrix.get(i + cellRow).get(j + cellColumn);
+                        cellMatrix[cellRow][cellColumn] = matrix.get(i*8 + cellRow).get(j*8 + cellColumn);
                     }
                 }
                 cells.get(i).add(new Cell(cellMatrix));
