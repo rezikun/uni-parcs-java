@@ -57,8 +57,8 @@ public class Cell implements Serializable {
         Dct.forwardDCT8x8(mode(bMatrix));
         for (int i = 0; i< 8; ++i) {
             for (int j = 0; j < 8; ++j) {
-                System.out.println(rMatrix[i][j]);
                 rMatrix[i][j] = useQuatization(rMatrix[i][j], i, j);
+                System.out.println(rMatrix[i][j]);
                 gMatrix[i][j] = useQuatization(gMatrix[i][j], i, j);
                 bMatrix[i][j] = useQuatization(bMatrix[i][j], i, j);
             }
