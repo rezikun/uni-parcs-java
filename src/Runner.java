@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DCT implements AM {
+public class Runner implements AM {
     @Override
     public void run(AMInfo info) {
         List<Cell> row = (List<Cell>) info.parent.readObject();

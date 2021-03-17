@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.io.Serializable;
-import org.jtransforms.dct.*;
 
 public class Cell implements Serializable {
     Color[][] matrix = new Color[8][8];
@@ -31,7 +30,25 @@ public class Cell implements Serializable {
     private float invertQuatization(float val, int i, int j) {
         return val * quantizationTable[i][j];
     }
+    public static float[] mode(float[][] arr) {
+        List<Float> list = new ArrayList<Float>();
+        for (float[] ints : arr) {
+            // tiny change 1: proper dimensions
+            for (float anInt : ints) {
+                // tiny change 2: actually store the values
+                list.add(anInt);
+            }
+        }
 
+        // now you need to find a mode in the list.
+
+        // tiny change 3, if you definitely need an array
+        float[] vector = new float[list.size()];
+        for (int i = 0; i < vector.length; i++) {
+            vector[i] = list.get(i);
+        }
+        return vector;
+    }
     private Cell transform() {
         float[][] rMatrix = new float[8][8];
         float[][] gMatrix = new float[8][8];
@@ -43,10 +60,9 @@ public class Cell implements Serializable {
                 bMatrix[i][j] = matrix[i][j].getBlue() - 128;
             }
         }
-        FloatDCT_2D transformer = new FloatDCT_2D(8, 8);
-        transformer.forward(rMatrix, false);
-        transformer.forward(gMatrix, false);
-        transformer.forward(bMatrix, false);
+        Dct.forwardDCT8x8(mode(rMatrix));
+        Dct.forwardDCT8x8(mode(gMatrix));
+        Dct.forwardDCT8x8(mode(bMatrix));
         Color[][] newMatrix = new Color[8][8];
         for (int i = 0; i< 8; ++i) {
             for (int j = 0; j < 8; ++j) {
@@ -68,10 +84,9 @@ public class Cell implements Serializable {
                 bMatrix[i][j] = invertQuatization(matrix[i][j].getBlue(), i, j);
             }
         }
-        FloatDCT_2D transformer = new FloatDCT_2D(8, 8);
-        transformer.inverse(rMatrix, false);
-        transformer.inverse(gMatrix, false);
-        transformer.inverse(bMatrix, false);
+        Dct.inverseDCT8x8(mode(rMatrix));
+        Dct.inverseDCT8x8(mode(gMatrix));
+        Dct.inverseDCT8x8(mode(bMatrix));
         Color[][] newMatrix = new Color[8][8];
         for (int i = 0; i< 8; ++i) {
             for (int j = 0; j < 8; ++j) {
