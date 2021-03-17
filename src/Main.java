@@ -29,6 +29,9 @@ public class Main {
         ImageMatrix imageMatrix = new ImageMatrix(newImage);
 
         List<List<Cell>> cells = imageMatrix.splitIntoCells();
+        BufferedImage processedTest = ImageMatrix.fromCells(cells).toBufferedImage();
+        File outputfileTest = new File("processedImageTest.jpg");
+        ImageIO.write(processedTest, "jpg", outputfileTest);
 
         List<channel> channels = new ArrayList<>();
         for (List<Cell> cellRow: cells) {
