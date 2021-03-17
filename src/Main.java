@@ -16,6 +16,9 @@ public class Main {
         System.out.println("Loading image...");
         File img = new File(curtask.findFile("image.jpg"));
         BufferedImage in = ImageIO.read(img);
+        if (in.getWidth() == 0) {
+            throw new RuntimeException("Empty image");
+        }
         BufferedImage newImage = new BufferedImage(
                 in.getWidth(), in.getHeight(), BufferedImage.TYPE_INT_ARGB);
         ImageMatrix imageMatrix = new ImageMatrix(newImage);
