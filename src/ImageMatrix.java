@@ -9,10 +9,12 @@ public class ImageMatrix {
     public ImageMatrix(BufferedImage image) {
         int width = image.getWidth(null);
         int height = image.getHeight(null);
+        System.out.println(width);
         for (int i = 0; i < width; i++) {
             matrix.add(new ArrayList<>());
             for (int j = 0; j < height; j++) {
                 matrix.get(i).add(new Color(image.getRGB(i, j)));
+                System.out.println(image.getRGB(i, j));
             }
         }
     }
