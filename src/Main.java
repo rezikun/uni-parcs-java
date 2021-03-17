@@ -14,10 +14,15 @@ public class Main {
         AMInfo info = new AMInfo(curtask, null);
 
         System.out.println("Loading image...");
-        File img = new File(curtask.findFile("image.jpg"));
+        File img = new File(curtask.findFile("small.jpg"));
         BufferedImage newImage = ImageIO.read(img);
-        File outputfileTest = new File("processedImageTest.jpg");
-        ImageIO.write(newImage, "jpg", outputfileTest);
+        System.out.println("OLD");
+        for (int i = 0; i < 16; ++i) {
+            for (int j = 0; j < 16; ++j){
+                System.out.println(newImage.getRGB(i, j));
+            }
+        }
+        System.out.println("\n");
         ImageMatrix imageMatrix = new ImageMatrix(newImage);
 
         List<List<Cell>> cells = imageMatrix.splitIntoCells();
@@ -41,6 +46,13 @@ public class Main {
 
         System.out.println("Decoding image.");
         BufferedImage processed = ImageMatrix.fromCells(processedCells).toBufferedImage();
+        System.out.println("NEW");
+        for (int i = 0; i < 16; ++i) {
+            for (int j = 0; j < 16; ++j){
+                System.out.println(processed.getRGB(i, j));
+            }
+        }
+        System.out.println("\n");
         File outputfile = new File("processedImage.jpg");
         ImageIO.write(processed, "jpg", outputfile);
         System.out.println("Done.");
