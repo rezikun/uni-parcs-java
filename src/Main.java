@@ -10,7 +10,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws Exception {
         task curtask = new task();
-        curtask.addJarFile("DCT.jar");
+        curtask.addJarFile("Runner.jar");
         AMInfo info = new AMInfo(curtask, null);
 
         System.out.println("Loading image...");
@@ -27,7 +27,7 @@ public class Main {
         for (List<Cell> cellRow: cells) {
             point p = info.createPoint();
             channel c = p.createChannel();
-            p.execute("DCT");
+            p.execute("Runner");
             c.write((Serializable) cellRow);
             channels.add(c);
         }
