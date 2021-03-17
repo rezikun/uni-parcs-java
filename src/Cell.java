@@ -51,7 +51,6 @@ public class Cell implements Serializable {
         return vector;
     }
     private void transform(float[][] rMatrix, float[][] gMatrix, float[][] bMatrix) {
-
         for (int i = 0; i< 8; ++i) {
             for (int j = 0; j < 8; ++j) {
                 rMatrix[i][j] = matrix[i][j].getRed() - 128;
@@ -85,6 +84,7 @@ public class Cell implements Serializable {
         Color[][] newMatrix = new Color[8][8];
         for (int i = 0; i< 8; ++i) {
             for (int j = 0; j < 8; ++j) {
+                System.out.println((int)rMatrix[i][j] + 128);
                 newMatrix[i][j] =
                         new Color((int)rMatrix[i][j] + 128, (int)gMatrix[i][j] + 128, (int)bMatrix[i][j] + 128);
             }
