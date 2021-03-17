@@ -47,7 +47,6 @@ public class Cell implements Serializable {
     private void transform(float[][] rMatrix, float[][] gMatrix, float[][] bMatrix) {
         for (int i = 0; i< 8; ++i) {
             for (int j = 0; j < 8; ++j) {
-                System.out.println(matrix[i][j].getRed());
                 rMatrix[i][j] = matrix[i][j].getRed() - 128;
                 gMatrix[i][j] = matrix[i][j].getGreen() - 128;
                 bMatrix[i][j] = matrix[i][j].getBlue() - 128;
@@ -58,6 +57,7 @@ public class Cell implements Serializable {
         Dct.forwardDCT8x8(mode(bMatrix));
         for (int i = 0; i< 8; ++i) {
             for (int j = 0; j < 8; ++j) {
+                System.out.println(rMatrix[i][j]);
                 rMatrix[i][j] = useQuatization(rMatrix[i][j], i, j);
                 gMatrix[i][j] = useQuatization(gMatrix[i][j], i, j);
                 bMatrix[i][j] = useQuatization(bMatrix[i][j], i, j);
