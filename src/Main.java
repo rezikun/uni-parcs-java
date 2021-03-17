@@ -18,6 +18,8 @@ public class Main {
         BufferedImage in = ImageIO.read(img);
         BufferedImage newImage = new BufferedImage(
                 in.getWidth(), in.getHeight(), BufferedImage.TYPE_INT_RGB);
+        File outputfile = new File("processedImageTest.jpg");
+        ImageIO.write(newImage, "jpg", outputfile);
         ImageMatrix imageMatrix = new ImageMatrix(newImage);
 
         List<List<Cell>> cells = imageMatrix.splitIntoCells();
