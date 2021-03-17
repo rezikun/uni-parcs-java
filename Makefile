@@ -13,7 +13,7 @@ out/DCT.jar: out/JTransforms-3.1-with-dependencies.jar out/parcs.jar src/DCT.jav
 	@jar cf out/DCT.jar -C src DCT.class -C src Cell.class -C src ImageMatrix.class
 	@rm -f src/DCT.class src/Cell.class src/ImageMatrix.class
 
-build: out/Main.jar out/DCT.jar
+build: out/Main.jar out/DCT.jar out/JTransforms-3.1-with-dependencies.jar
 
 run: out/Main.jar out/DCT.jar
 	@cd out && java -cp 'JTransforms-3.1-with-dependencies.jar:parcs.jar:Main.jar' Main
