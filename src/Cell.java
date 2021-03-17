@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class Cell implements Serializable {
     Color[][] matrix = new Color[8][8];
-    private static final long serialVersionUID = -1292602099975556693L;
+    private static final long SerialVersionUID = -1292602099975556693L;
     private static final int[][] quantizationTable = {
             {17, 18, 24, 47, 99, 99, 99, 99},
             {18, 21, 26, 66, 99, 99, 99, 99},
