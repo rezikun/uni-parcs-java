@@ -6,7 +6,7 @@ import java.util.List;
 import java.io.Serializable;
 
 public class Cell implements Serializable {
-    Color[][] matrix = new Color[8][8];
+    Color[][] matrix;
     private static final long serialVersionUID = -1779337317625099010L;
     private static final int[][] quantizationTable = {
             {17, 18, 24, 47, 99, 99, 99, 99},
@@ -53,6 +53,7 @@ public class Cell implements Serializable {
     private void transform(float[][] rMatrix, float[][] gMatrix, float[][] bMatrix) {
         for (int i = 0; i< 8; ++i) {
             for (int j = 0; j < 8; ++j) {
+                System.out.println(matrix[i][j].getRed());
                 rMatrix[i][j] = matrix[i][j].getRed() - 128;
                 gMatrix[i][j] = matrix[i][j].getGreen() - 128;
                 bMatrix[i][j] = matrix[i][j].getBlue() - 128;
@@ -84,7 +85,6 @@ public class Cell implements Serializable {
         Color[][] newMatrix = new Color[8][8];
         for (int i = 0; i< 8; ++i) {
             for (int j = 0; j < 8; ++j) {
-                System.out.println((int)rMatrix[i][j] + 128);
                 newMatrix[i][j] =
                         new Color((int)rMatrix[i][j] + 128, (int)gMatrix[i][j] + 128, (int)bMatrix[i][j] + 128);
             }
