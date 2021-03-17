@@ -18,7 +18,7 @@ public class Runner implements AM {
             float[][] bMatrix = new float[8][8];
             cell.transform(rMatrix, gMatrix, bMatrix);
             cell = Cell.detransform(rMatrix, gMatrix, bMatrix);
-            System.out.println(String.format("After %d\n", cell.matrix[0][0].getRGB()));
+            System.out.println(String.format("After  %d\n", cell.matrix[0][0].getRGB()));
             newRow.add(cell);
         }
         info.parent.write((Serializable) newRow);
