@@ -15,7 +15,7 @@ public class Main {
         AMInfo info = new AMInfo(curtask, null);
 
         System.out.println("Loading image...");
-        File img = new File(curtask.findFile("big.png"));
+        File img = new File(curtask.findFile("huge.jfif"));
         BufferedImage newImage = ImageIO.read(img);
         ImageMatrix imageMatrix = new ImageMatrix(newImage);
 
